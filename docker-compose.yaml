@@ -1,0 +1,27 @@
+version: '4.0'
+services:
+
+  # Database - Mongo DB
+  mongodbwish:
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./docker-entrypoint-initdb.d/mongo-init/:/mongo-init
+      - ./docker-entrypoint-initdb.d/mongodb:/data/db
+#    command:
+#      - sh -c /mongo-init/import.sh
+
+  #  # Database Manager
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8999:8081
+    depends_on:
+      - mongodbwish
+    environment:
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_URL: mongodb://mongodbwish:27017/wishlist
+    links:
+      - mongodbwish

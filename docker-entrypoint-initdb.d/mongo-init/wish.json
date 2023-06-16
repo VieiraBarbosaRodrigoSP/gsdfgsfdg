@@ -1,0 +1,12 @@
+[
+  {
+    "_id": 1,
+    "customer": {
+      "id": 1,
+      "name": "João Teste 01",
+      "email": "joao.teste.01@mail.com"
+    },
+    "products": [
+    ]
+  }
+]
